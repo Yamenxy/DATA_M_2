@@ -1,43 +1,198 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ahmed_Mohie_Social_Media</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <link rel="stylesheet" href="Ahmed_Mohie.css">
-</head>
-<body class="task">
-
-<script type="text/javascript">
-    function Form() {
-        var selectvalue = $('input[name=link]:checked', '#Form').val();
-        if (selectvalue == "1") {
-            window.location.href = 'https://yamenxy.github.io/DATA_M/';
-        } else if (selectvalue == "2") {
-            window.open('goto_2.html', '_self');
-            return true;
+    <title>Form with Unique Code</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            font-family: 'poppins', sans-serif;
+            font-size: 18px;
         }
 
-        return false;
+        .container .tape {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .container .tape:after,
+        .container .tape:before {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 100%;
+            background-color: #fff;
+        }
+
+        .container .tape:after {
+            top: 0;
+            left: 0;
+            transform: skewX(45deg);
+        }
+
+        .container .tape:before {
+            top: 100%;
+            left: 0;
+            transform: skewX(-45deg);
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+    width: 700px;
+    padding: 50px;
+    border: 1px solid #623737;
+    border-radius: 30px;
+    background-color: rgba(1, 67, 103, 0.6); /* Adjust the alpha value (0.5 in this example) */
+}
+
+
+        h4 {
+            margin-bottom: 10px;
+            font-size: 24px;
+            color: white;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        #submit {
+            border: none;
+            background-color: orangered;
+            color: white;
+            width: 200px;
+            margin-top: 10px;
+            margin-left: 195px;
+            border-radius: 5px;
+        }
+
+        #submit:hover {
+            background-color: #333333;
+        }
+
+        .image{
+ 
+ max-width: 100%;
+ max-height: 100%;
+ font-size: 20px;
+
+}  
+.image_container{
+ font-size: 20px;
+
+}
+
+
+body {
+    background-image: url('27aaa2af-994c-4d8a-8221-c5a3674cbb9b.jpg'); /* Replace '27aaa2af-994c-4d8a-8221-c5a3674cbb9b.jpg' with the path to your image */
+    background-size:cover; /* Cover the entire background */
+    background-repeat: no-repeat; /* Don't repeat the background image */
+    background-position: center; /* Center the background image */
+  }
+  
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form method="post" action="" name="contact-form">
+            <h4>Enter Your Data</h4>
+            <input type="text" name="الاسم" placeholder="اسم الطالب">
+            <input type="text" name="رقم الطالب" placeholder="رقم الطالب">
+            <input type="text" name="رقم ولي الامر" placeholder="رقم ولي الامر">
+            <input type="text" name="اسم السنتر" placeholder="اسم السنتر">
+            <input type="hidden" name="الكود" id="unique_code">
+            <input type="submit" value="submit" id="submit">
+        </form>
+    </div>
+
+    <!-- <div class="image_container">
+        <img src="Ahmed.png" class="image"><br>
+    </div> -->
+
+    
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwbl1fClaLFwLFNIGBTfImpzrV0g4Ram4n16pAGKWh4b-ZjxbSxIsfwZfCgIqKowxOZ_Q/exec';
+        const form = document.forms['contact-form'];
+    
+        function generateUniqueCode() {
+            const chars = '123456789';
+            let code = '';
+            for (let i = 0; i < 5; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return code;
+        }
+    
+        function displaySuccessMessage(uniqueCode) {
+    console.log("Unique code generated:", uniqueCode);
+    const confirmation = confirm("شكرا! لقد تم ارسال بياناتك بنجاح و كووووووودك: " + uniqueCode + ".");
+    const confirmation_2 = confirm("حفظ الكود مهمتك الشخصيه كودك هو: " + uniqueCode );
+    const confirmation_3 = confirm("Click OK to visit the primary secondary page.");
+    console.log("Confirmation:", confirmation);
+    if (confirmation) {
+        console.log("Redirecting to primary secondary page...");
+        window.location.href = 'https://yamenxy.github.io/goto/';
     }
-</script>
+}
 
-<div class="Sign_in">
-    <a class="Logo">Physics Here</a><br><br><br>
-    <a class="Welcome">Welcome!</a><br><br><br><br>
-
-    <form id="Form">
-        <label for="Name" class="email">Your Name:</label><br>
-        <input type="text" class="email_2" id="email" name="email" required><br><br>
-
-        <input class="F" type="radio" onclick="Form()" name="link" value="1" required/>Primary Secondary<br><br>
-        <input class="S" type="radio" onclick="Form()" name="link" value="2" required/>Secondary Second
-
-    </form>
-</div>
-
-<div class="image_container">
-    <img src="Ahmed.png" class="image"><br>
-</div>
-
+    
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            console.log("Form submitted.");
+            let isValid = true;
+    
+            const studentNumber = form.elements['رقم الطالب'].value.trim();
+            const guardianNumber = form.elements['رقم ولي الامر'].value.trim();
+    
+            if (!isValidNumber(studentNumber)) {
+                isValid = false;
+                alert("رقم الطالب غير صحيح. يجب أن يبدأ بـ 010، 011، 012، أو 015 ويحتوي على 11 رقمًا.");
+            }
+    
+            if (!isValidNumber(guardianNumber)) {
+                isValid = false;
+                alert("رقم ولي الأمر غير صحيح. يجب أن يبدأ بـ 010، 011، 012، أو 015 ويحتوي على 11 رقمًا.");
+            }
+    
+            if (isValid) {
+                console.log("Form is valid. Generating unique code...");
+                const uniqueCode = generateUniqueCode();
+                document.getElementById('unique_code').value = uniqueCode;
+                console.log("Unique code set in hidden field:", uniqueCode);
+                fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                    .then(response => {
+                        console.log("Form submission response:", response);
+                        displaySuccessMessage(uniqueCode);
+                        return response;
+                    })
+                    .catch(error => console.error('Error!', error.message))
+                    .finally(() => {
+                        setTimeout(() => { window.location.reload(); }, 5000);
+                    });
+            }
+        });
+    
+        function isValidNumber(number) {
+            const validPrefixes = ['010', '011', '012', '015'];
+            return /^\d{11}$/.test(number) && validPrefixes.includes(number.substring(0, 3));
+        }
+    </script>
+    
+    
 </body>
 </html>
