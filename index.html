@@ -109,13 +109,26 @@ body {
 </head>
 <body>
     <div class="container">
-        <form method="post" action="" name="contact-form">
+        <form method="post" action="" name="contact-form" onsubmit="return validateForm()">
             <h4>Enter Your Data</h4>
-            <input type="text" name="الاسم" placeholder="اسم الطالب">
-            <input type="text" name="رقم الطالب" placeholder="رقم الطالب">
-            <input type="text" name="رقم ولي الامر" placeholder="رقم ولي الامر">
-            <input type="text" name="اسم السنتر" placeholder="اسم السنتر">
+            <input type="text" name="الاسم" placeholder="اسم الطالب" required>
+            <input type="text" name="رقم الطالب" placeholder="رقم الطالب"required>
+            <input type="text" name="رقم ولي الامر" placeholder="رقم ولي الامر"required>
+            <br>
+            
+                <select name="اسم السنتر" required>
+                    <option value="" placeholder="" style="">اختر اسم السنتر</option>
+                    <option value="الاسماعليه حدائق المعادي">الاسماعليه حدائق المعادي</option>
+                    <option value="لرحمه المعادي">الرحمه المعادي</option>
+                    <option value="اشراقه السادس">اشراقه السادس</option>
+                    <option value="الامل السابع">الامل السابع</option>
+                    <option value="الامل الحصري">الامل الحصري</option>
+                    <option value="اسك الحادي عشر">اسك الحادي عشر</option>
+                    <option value="اسمارت السابع">اسمارت السابع</option>
+                </select>
+            
             <input type="hidden" name="الكود" id="unique_code">
+            <br><br><br>
             <input type="submit" value="submit" id="submit">
         </form>
     </div>
