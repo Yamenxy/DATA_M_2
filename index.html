@@ -172,10 +172,18 @@
             }
 
             const wordsCount = name.split(" ").length;
-            if (name.includes("عبد") && wordsCount < 5) { // Check if name contains "عبد" and has exactly five words
+            if (name.includes("عبد") && wordsCount < 5 ) { // Check if name contains "عبد" and has exactly five words
+            isValid = false;
+            alert("الرجاء إدخال الاسم رباعي!");
+            }
+            else if (name.includes("منه الله") && wordsCount < 5 ) { // Check if name contains "عبد" and has exactly five words
                 isValid = false;
                 alert("الرجاء إدخال الاسم رباعي!");
             } else if (!name.includes("عبد") && wordsCount < 4) { // Check if name does not contain "عبد" and has less than four words
+                isValid = false;
+                alert("الرجاء إدخال الاسم رباعي!");
+            }
+            else if (!name.includes("منه الله") && wordsCount < 5 ) { // Check if name contains "عبد" and has exactly five words
                 isValid = false;
                 alert("الرجاء إدخال الاسم رباعي!");
             }
