@@ -50,13 +50,12 @@
         }
 
         .container {
-    width: 700px;
-    padding: 50px;
-    border: 1px solid #623737;
-    border-radius: 30px;
-    background-color: rgba(1, 67, 103, 0.6); /* Adjust the alpha value (0.5 in this example) */
-}
-
+            width: 700px;
+            padding: 50px;
+            border: 1px solid #623737;
+            border-radius: 30px;
+            background-color: rgba(1, 67, 103, 0.6); /* Adjust the alpha value (0.5 in this example) */
+        }
 
         h4 {
             margin-bottom: 10px;
@@ -68,12 +67,14 @@
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
+            border-radius: 40px;
         }
 
         select{
             width: 100%;
             padding: 10px;
             margin-bottom: 10px;
+            border-radius: 40px;
         }
 
         #submit {
@@ -83,7 +84,7 @@
             width: 200px;
             margin-top: 10px;
             margin-left: 195px;
-            border-radius: 5px;
+            border-radius: 40px;
         }
 
         #submit:hover {
@@ -91,63 +92,51 @@
         }
 
         .image{
- 
- max-width: 100%;
- max-height: 100%;
- font-size: 20px;
+            max-width: 100%;
+            max-height: 100%;
+            font-size: 20px;
+        }  
 
-}  
-.image_container{
- font-size: 20px;
+        .image_container{
+            font-size: 20px;
+        }
 
-}
-
-
-body {
-    background-image: url('27aaa2af-994c-4d8a-8221-c5a3674cbb9b.jpg'); /* Replace '27aaa2af-994c-4d8a-8221-c5a3674cbb9b.jpg' with the path to your image */
-    background-size:cover; /* Cover the entire background */
-    background-repeat: no-repeat; /* Don't repeat the background image */
-    background-position: center; /* Center the background image */
-  }
-  
-
+        body {
+            background-image: url('27aaa2af-994c-4d8a-8221-c5a3674cbb9b.jpg'); /* Replace '27aaa2af-994c-4d8a-8221-c5a3674cbb9b.jpg' with the path to your image */
+            background-size:cover; /* Cover the entire background */
+            background-repeat: no-repeat; /* Don't repeat the background image */
+            background-position: center; /* Center the background image */
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <form method="post" action="" name="contact-form" onsubmit="return validateForm()">
+        <form action="https://script.google.com/macros/s/AKfycbwFhu-1ep6xX77oaVh7vI9LxwoDQgoBkUpkuxXKEMmHLfAMvnes7J5wG2GtbeOkhBBLXg/exec" name="contact-form" onsubmit="return false">
             <h4>Enter Your Data</h4>
-            <input type="text" name="الاسم" placeholder="اسم الطالب" required>
-            <input type="text" name="رقم الطالب" placeholder="رقم الطالب"required>
-            <input type="text" name="رقم ولي الامر" placeholder="رقم ولي الامر"required>
+            <input type="text" name="الاسم" placeholder="اسم الطالب رباعي" required>
+            <input type="text" name="رقم الطالب" placeholder="رقم الطالب" required>
+            <input type="text" name="رقم ولي الامر" placeholder="رقم ولي الامر" required>
             <br>
-            
-                <select name="اسم السنتر" required>
-                    <option value="" placeholder="" style="">اختر اسم السنتر</option>
-                    <option value="الاسماعليه حدائق المعادي">الاسماعليه حدائق المعادي</option>
-                    <option value="لرحمه المعادي">الرحمه المعادي</option>
-                    <option value="اشراقه السادس">اشراقه السادس</option>
-                    <option value="الامل السابع">الامل السابع</option>
-                    <option value="الامل الحصري">الامل الحصري</option>
-                    <option value="اسك الحادي عشر">اسك الحادي عشر</option>
-                    <option value="اسمارت السابع">اسمارت السابع</option>
-                </select>
-            
+            <select name="اسم السنتر" required>
+                <option value="" placeholder="" style="">اختر اسم السنتر</option>
+                <option value="الاسماعليه حدائق المعادي">الاسماعليه حدائق المعادي</option>
+                <option value="لرحمه المعادي">الرحمه المعادي</option>
+                <option value="اشراقه السادس">اشراقه السادس</option>
+                <option value="الامل السابع">الامل السابع</option>
+                <option value="الامل الحصري">الامل الحصري</option>
+                <option value="اسك الحادي عشر">اسك الحادي عشر</option>
+                <option value="اسمارت السابع">اسمارت السابع</option>
+            </select>
             <input type="hidden" name="الكود" id="unique_code">
             <br><br><br>
             <input type="submit" value="submit" id="submit">
         </form>
     </div>
-
-    <!-- <div class="image_container">
-        <img src="Ahmed.png" class="image"><br>
-    </div> -->
-
     
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxFqaiv_Y73CBJxzCcgZv8fdoz4DXvDtbecXVM3fyktYXgu7HxVcZZZbbyB0YfMSDF5Wg/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwoxinM8SMl39csdm5SXZHJukFhoTzCDSRMjzxvsX6W/dev';
         const form = document.forms['contact-form'];
-    
+
         function generateUniqueCode() {
             const chars = '123456789';
             let code = '';
@@ -156,38 +145,42 @@ body {
             }
             return code;
         }
-    
-        function displaySuccessMessage(uniqueCode) {
-    console.log("Unique code generated:", uniqueCode);
-    const confirmation = confirm("شكرا! لقد تم ارسال بياناتك بنجاح و كووووووودك: " + uniqueCode + ".");
-    const confirmation_2 = confirm("حفظ الكود مهمتك الشخصيه كودك هو: " + uniqueCode );
-    const confirmation_3 = confirm("Click OK to visit the primary secondary page.");
-    console.log("Confirmation:", confirmation);
-    if (confirmation) {
-        console.log("Redirecting to primary secondary page...");
-        window.location.href = 'https://yamenxy.github.io/goto_2/';
-    }
-}
 
-    
+        function displaySuccessMessage(uniqueCode) {
+            console.log("Unique code generated:", uniqueCode);
+            alert("شكرا! لقد تم ارسال بياناتك بنجاح و كووووووودك: " + uniqueCode + ".");
+            alert("حفظ الكود مهمتك الشخصيه كودك هو: " + uniqueCode );
+            if (confirm("Click OK to visit the primary secondary page.")) {
+                console.log("Redirecting to primary secondary page...");
+                window.location.href = 'https://yamenxy.github.io/goto/';
+            }
+        }
+
         form.addEventListener('submit', e => {
             e.preventDefault();
             console.log("Form submitted.");
             let isValid = true;
-    
+
+            const name = form.elements['الاسم'].value.trim();
             const studentNumber = form.elements['رقم الطالب'].value.trim();
             const guardianNumber = form.elements['رقم ولي الامر'].value.trim();
-    
+
+            // Validation code here...
+            if (!isValidArabic(name)) {
+                isValid = false;
+                alert("ادخل الاسم باللغه العربيه!");
+            }
+
             if (!isValidNumber(studentNumber)) {
                 isValid = false;
-                alert("رقم الطالب غير صحيح. يجب أن يبدأ بـ 010، 011، 012، أو 015 ويحتوي على 11 رقمًا.");
+                alert("ادخل رقم الطالب صحيح!");
             }
-    
+
             if (!isValidNumber(guardianNumber)) {
                 isValid = false;
-                alert("رقم ولي الأمر غير صحيح. يجب أن يبدأ بـ 010، 011، 012، أو 015 ويحتوي على 11 رقمًا.");
+                alert("ادخل رقم ولي الامر صحيح!");
             }
-    
+
             if (isValid) {
                 console.log("Form is valid. Generating unique code...");
                 const uniqueCode = generateUniqueCode();
@@ -197,21 +190,20 @@ body {
                     .then(response => {
                         console.log("Form submission response:", response);
                         displaySuccessMessage(uniqueCode);
-                        return response;
                     })
-                    .catch(error => console.error('Error!', error.message))
-                    .finally(() => {
-                        setTimeout(() => { window.location.reload(); }, 5000);
-                    });
+                    .catch(error => console.error('Error!', error.message));
             }
         });
-    
+
         function isValidNumber(number) {
             const validPrefixes = ['010', '011', '012', '015'];
             return /^\d{11}$/.test(number) && validPrefixes.includes(number.substring(0, 3));
         }
+
+        function isValidArabic(text) {
+            const arabicRegex = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/;
+            return arabicRegex.test(text);
+        }
     </script>
-    
-    
 </body>
 </html>
