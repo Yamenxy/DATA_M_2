@@ -180,6 +180,42 @@
                 window.location.href = 'https://yamenxy.github.io/goto/';
             }
         }
+
+        function isStrongPassword(password) {
+    // At least 8 characters
+    const minLength = 8;
+    if (password.length < minLength) {
+        return false;
+    }
+
+    // Should contain at least one uppercase letter
+    const uppercaseRegex = /[A-Z]/;
+    if (!uppercaseRegex.test(password)) {
+        return false;
+    }
+
+    // Should contain at least one lowercase letter
+    const lowercaseRegex = /[a-z]/;
+    if (!lowercaseRegex.test(password)) {
+        return false;
+    }
+
+    // Should contain at least one number
+    const numberRegex = /[0-9]/;
+    if (!numberRegex.test(password)) {
+        return false;
+    }
+
+    // Should contain at least one special character
+    const specialCharRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+    if (!specialCharRegex.test(password)) {
+        return false;
+    }
+
+    return true;
+}
+
+
             // Validation code here...
            
             form.addEventListener('submit', e => {
@@ -235,6 +271,11 @@
                 alert("ادخل رقم ولي الامر صحيح!");
             }
 
+            if (!isStrongPassword(password)) {
+        isValid = false;
+        alert("كلمة المرور ضعيفة! يجب أن تحتوي على 8 أحرف على الأقل، وعلى الأقل حرف كبير، حرف صغير، رقم وحرف خاص.");
+    }
+
             if (isValid) {
                 console.log("Form is valid. Generating unique code...");
                 const uniqueCode = generateUniqueCode();
@@ -248,6 +289,16 @@
                     .catch(error => console.error('Error!', error.message));
                     isValid = false;
                     document.getElementById('submit').disabled = true;
+            }
+
+            
+        });
+
+        document.getElementById('getCode').addEventListener('click', () => {
+            if (generatedCode) { // Check if a code has been generated previously
+                alert("Your unique code is: " + generatedCode);
+            } else {
+                alert("No unique code generated yet.");
             }
         });
 
