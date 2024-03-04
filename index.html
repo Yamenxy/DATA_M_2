@@ -139,6 +139,8 @@
             <input type="text" name="الاسم" placeholder="اسم الطالب رباعي" required>
             <input type="text" name="رقم الطالب" placeholder="رقم الطالب" required>
             <input type="text" name="رقم ولي الامر" placeholder="رقم ولي الامر" required>
+            <input type="password" name="password" placeholder="كلمة المرور" required>
+            <input type="password" name="confirm_password" placeholder="تأكيد كلمة المرور" required>
             <br>
             <select name="اسم السنتر" required>
                 <option value="" placeholder="" style="">اختر اسم السنتر</option>
@@ -178,21 +180,33 @@
                 window.location.href = 'https://yamenxy.github.io/goto/';
             }
         }
-
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            console.log("Form submitted.");
-            let isValid = true;
-
-            const name = form.elements['الاسم'].value.trim();
-            const studentNumber = form.elements['رقم الطالب'].value.trim();
-            const guardianNumber = form.elements['رقم ولي الامر'].value.trim();
-
             // Validation code here...
-            if (!isValidArabic(name)) {
+           
+            form.addEventListener('submit', e => {
+    e.preventDefault();
+    console.log("Form submitted.");
+    let isValid = true;
+
+    // Get the values of all form fields
+    const name = form.elements['الاسم'].value.trim();
+    const studentNumber = form.elements['رقم الطالب'].value.trim();
+    const guardianNumber = form.elements['رقم ولي الامر'].value.trim();
+    const password = form.elements['password'].value.trim();
+    const confirmPassword = form.elements['confirm_password'].value.trim();
+
+    // Validation code for name, studentNumber, guardianNumber, and other fields...
+    // Your existing validation code...
+
+    if (!isValidArabic(name)) {
                 isValid = false;
                 alert("ادخل الاسم باللغه العربيه!");
             }
+
+    // Password validation
+    if (password !== confirmPassword) {
+        isValid = false;
+        alert("كلمات المرور غير متطابقة!");
+    }        
 
             const wordsCount = name.split(" ").length;
             if (name.includes("عبد") && wordsCount < 5 ) { // Check if name contains "عبد" and has exactly five words
@@ -232,6 +246,8 @@
                         displaySuccessMessage(uniqueCode);
                     })
                     .catch(error => console.error('Error!', error.message));
+                    isValid = false;
+                    document.getElementById('submit').disabled = true;
             }
         });
 
