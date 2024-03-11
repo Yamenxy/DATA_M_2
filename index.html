@@ -130,6 +130,27 @@
             background-position: center; /* Center the background image */
         }
         
+        #loadingOverlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.5);
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #loadingBox {
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+        }
+
     </style>
 </head>
 <body>
@@ -156,11 +177,17 @@
             <br><br><br>
             <input type="submit" value="submit" id="submit">
         </form>
+        <div id="loadingOverlay" style="display: none;">
+            <div id="loadingBox" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 20px; background-color: rgba(255, 255, 255, 0.8); border-radius: 10px; text-align: center;">
+                <p>يتم الان ارسال البيانات برجاء الانتظار للحصول على الكود!</p>
+            </div>
+        </div>
     </div>
     
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbww__Ez21Tn50jEiiMLIDJE325LBAoJ9it3rQjIkYwg4QlZ6YbP5bcSrXsFIFQ3bxQPcg/exec';
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzOQ4qGEW9uUrnlCfFz5BsdS1g0uuu0zUT1hsrR009t6G4E6FEMXCvtfIc8V07_WGpY-A/exec';
         const form = document.forms['contact-form'];
+        const loadingBox = document.getElementById('loadingBox');
 
         function generateUniqueCode() {
             const chars = '123456789';
@@ -171,10 +198,50 @@
             return code;
         }
 
+        function displayLoadingBox() {
+            // Show loading box
+            loadingOverlay.style.display = 'block';
+        }
+
+        function hideLoadingBox() {
+            // Hide loading box
+            loadingOverlay.style.display = 'none';
+        }
+
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            console.log("Form submitted.");
+
+            displayLoadingBox();
+
+            let isValid = true;
+            // Your validation code
+
+            if (isValid) {
+                console.log("Form is valid. Generating unique code...");
+                const uniqueCode = generateUniqueCode();
+                document.getElementById('unique_code').value = uniqueCode;
+                console.log("Unique code set in hidden field:", uniqueCode);
+                fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                    .then(response => {
+                        console.log("Form submission response:", response);
+                        hideLoadingBox();
+                        displaySuccessMessage(uniqueCode);
+                    })
+                    .catch(error => {
+                        console.error('Error!', error.message);
+                        hideLoadingBox();
+                    });
+                isValid = false;
+                document.getElementById('submit').disabled = true;
+            }
+        });
+
         function displaySuccessMessage(uniqueCode) {
             console.log("Unique code generated:", uniqueCode);
             alert("شكرا! لقد تم ارسال بياناتك بنجاح و كووووووودك: " + uniqueCode + ".");
             alert("حفظ الكود مهمتك الشخصيه كودك هو: " + uniqueCode );
+            alert("برجاء عدم عمل هذه العملية مرة اخري" );
             if (confirm("Click OK to visit the primary secondary page.")) {
                 console.log("Redirecting to primary secondary page...");
                 window.location.href = 'https://yamenxy.github.io/goto/';
@@ -275,23 +342,7 @@
         isValid = false;
         alert("كلمة المرور ضعيفة! يجب أن تحتوي على 8 أحرف على الأقل، وعلى الأقل حرف كبير، حرف صغير، رقم وحرف خاص.");
     }
-
-            if (isValid) {
-                console.log("Form is valid. Generating unique code...");
-                const uniqueCode = generateUniqueCode();
-                document.getElementById('unique_code').value = uniqueCode;
-                console.log("Unique code set in hidden field:", uniqueCode);
-                fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-                    .then(response => {
-                        console.log("Form submission response:", response);
-                        displaySuccessMessage(uniqueCode);
-                    })
-                    .catch(error => console.error('Error!', error.message));
-                    isValid = false;
-                    document.getElementById('submit').disabled = true;
-            }
-
-            
+          
         });
 
         document.getElementById('getCode').addEventListener('click', () => {
@@ -301,6 +352,7 @@
                 alert("No unique code generated yet.");
             }
         });
+
 
         function isValidNumber(number) {
             const validPrefixes = ['010', '011', '012', '015'];
