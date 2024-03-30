@@ -155,7 +155,7 @@
 </head>
 <body>
     <div class="container">
-        <form action="https://script.google.com/macros/s/AKfycbwFhu-1ep6xX77oaVh7vI9LxwoDQgoBkUpkuxXKEMmHLfAMvnes7J5wG2GtbeOkhBBLXg/exec" name="contact-form" onsubmit="return false">
+  <form action="https://script.google.com/macros/s/AKfycbxWZAeRYwAdVHkIQBFKxD8__OfRyKlu8KH7MRtVTlkXkKDrFrJdxIApHIoWUPKp6dSY-Q/exec" name="contact-form" onsubmit="return false">
             <h4>Enter Your Data</h4>
             <input type="text" name="الاسم" placeholder="اسم الطالب رباعي" required>
             <input type="text" name="رقم الطالب" placeholder="رقم الطالب" required>
@@ -185,9 +185,10 @@
     </div>
     
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzOQ4qGEW9uUrnlCfFz5BsdS1g0uuu0zUT1hsrR009t6G4E6FEMXCvtfIc8V07_WGpY-A/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwo0xJL1IK0x1A9-DmE0B5ggBMMNof5CC0T0m6gUDgqgPAcYRJoZPieKdoWEEgRUFHzGQ/exec';
         const form = document.forms['contact-form'];
         const loadingBox = document.getElementById('loadingBox');
+        isValid=true;
 
         function generateUniqueCode() {
             const chars = '123456789';
@@ -208,35 +209,7 @@
             loadingOverlay.style.display = 'none';
         }
 
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            console.log("Form submitted.");
-
-            displayLoadingBox();
-
-            let isValid = true;
-            // Your validation code
-
-            if (isValid) {
-                console.log("Form is valid. Generating unique code...");
-                const uniqueCode = generateUniqueCode();
-                document.getElementById('unique_code').value = uniqueCode;
-                console.log("Unique code set in hidden field:", uniqueCode);
-                fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-                    .then(response => {
-                        console.log("Form submission response:", response);
-                        hideLoadingBox();
-                        displaySuccessMessage(uniqueCode);
-                    })
-                    .catch(error => {
-                        console.error('Error!', error.message);
-                        hideLoadingBox();
-                    });
-                isValid = false;
-                document.getElementById('submit').disabled = true;
-            }
-        });
-
+        
         function displaySuccessMessage(uniqueCode) {
             console.log("Unique code generated:", uniqueCode);
             alert("شكرا! لقد تم ارسال بياناتك بنجاح و كووووووودك: " + uniqueCode + ".");
@@ -244,7 +217,7 @@
             alert("برجاء عدم عمل هذه العملية مرة اخري" );
             if (confirm("Click OK to visit the primary secondary page.")) {
                 console.log("Redirecting to primary secondary page...");
-                window.location.href = 'https://yamenxy.github.io/goto/';
+                window.location.href = 'https://script.google.com/macros/s/AKfycbwo0xJL1IK0x1A9-DmE0B5ggBMMNof5CC0T0m6gUDgqgPAcYRJoZPieKdoWEEgRUFHzGQ/exec';
             }
         }
 
@@ -301,9 +274,9 @@
     // Your existing validation code...
 
     if (!isValidArabic(name)) {
-                isValid = false;
-                alert("ادخل الاسم باللغه العربيه!");
-            }
+        isValid = false;
+        alert("ادخل الاسم باللغه العربيه!");
+    }
 
     // Password validation
     if (password !== confirmPassword) {
@@ -311,39 +284,62 @@
         alert("كلمات المرور غير متطابقة!");
     }        
 
-            const wordsCount = name.split(" ").length;
-            if (name.includes("عبد") && wordsCount < 5 ) { // Check if name contains "عبد" and has exactly five words
-            isValid = false;
-            alert("الرجاء إدخال الاسم رباعي!");
-            }
-            else if (name.includes("منه الله") && wordsCount < 5 ) { // Check if name contains "عبد" and has exactly five words
-                isValid = false;
-                alert("الرجاء إدخال الاسم رباعي!");
-            } else if (!name.includes("عبد") && wordsCount < 4) { // Check if name does not contain "عبد" and has less than four words
-                isValid = false;
-                alert("الرجاء إدخال الاسم رباعي!");
-            }
-            else if (!name.includes("منه الله") && wordsCount < 4 ) { // Check if name contains "عبد" and has exactly five words
-                isValid = false;
-                alert("الرجاء إدخال الاسم رباعي!");
-            }
+    const wordsCount = name.split(" ").length;
+    if (name.includes("عبد") && wordsCount < 5 ) { // Check if name contains "عبد" and has exactly five words
+        isValid = false;
+        alert("الرجاء إدخال الاسم رباعي!");
+    }
+    else if (name.includes("منه الله") && wordsCount < 5 ) { // Check if name contains "عبد" and has exactly five words
+        isValid = false;
+        alert("الرجاء إدخال الاسم رباعي!");
+    } else if (!name.includes("عبد") && wordsCount < 4) { // Check if name does not contain "عبد" and has less than four words
+        isValid = false;
+        alert("الرجاء إدخال الاسم رباعي!");
+    }
+    else if (!name.includes("منه الله") && wordsCount < 4 ) { // Check if name contains "عبد" and has exactly five words
+        isValid = false;
+        alert("الرجاء إدخال الاسم رباعي!");
+    }
 
-            if (!isValidNumber(studentNumber)) {
-                isValid = false;
-                alert("ادخل رقم الطالب صحيح!");
-            }
+    if (!isValidNumber(studentNumber)) {
+        isValid = false;
+        alert("ادخل رقم الطالب صحيح!");
+    }
 
-            if (!isValidNumber(guardianNumber)) {
-                isValid = false;
-                alert("ادخل رقم ولي الامر صحيح!");
-            }
+    if (!isValidNumber(guardianNumber)) {
+        isValid = false;
+        alert("ادخل رقم ولي الامر صحيح!");
+    }
 
-            if (!isStrongPassword(password)) {
+    if (!isStrongPassword(password)) {
         isValid = false;
         alert("كلمة المرور ضعيفة! يجب أن تحتوي على 8 أحرف على الأقل، وعلى الأقل حرف كبير، حرف صغير، رقم وحرف خاص.");
     }
-          
-        });
+
+    if (isValid) {
+        displayLoadingBox();
+        console.log("Form is valid. Generating unique code...");
+        const uniqueCode = generateUniqueCode();
+        document.getElementById('unique_code').value = uniqueCode;
+        console.log("Unique code set in hidden field:", uniqueCode);
+        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+            .then(response => {
+                console.log("Form submission response:", response);
+                hideLoadingBox();
+                displaySuccessMessage(uniqueCode);
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                hideLoadingBox();
+            });
+        isValid = false;
+        document.getElementById('submit').disabled = true;
+    }
+
+    return false; // Prevent form submission if there are validation errors
+});
+
+
 
         document.getElementById('getCode').addEventListener('click', () => {
             if (generatedCode) { // Check if a code has been generated previously
