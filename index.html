@@ -318,6 +318,7 @@
 
     if (isValid) {
         displayLoadingBox();
+         document.getElementById('submit').disabled = true;
         console.log("Form is valid. Generating unique code...");
         const uniqueCode = generateUniqueCode();
         document.getElementById('unique_code').value = uniqueCode;
