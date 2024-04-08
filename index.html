@@ -1,162 +1,148 @@
+<!-- الصف الثاني الثانوي -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Form with Unique Code</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
     <style>
-        * {
-            box-sizing: border-box;
-            padding: 0;
-            margin: 0;
-            font-family: 'poppins', sans-serif;
-            font-size: 18px;
-        }
-
-        .container .tape {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.5);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .container .tape:after,
-        .container .tape:before {
-            content: "";
-            position: absolute;
-            width: 10px;
-            height: 100%;
-            background-color: #fff;
-        }
-
-        .container .tape:after {
-            top: 0;
-            left: 0;
-            transform: skewX(45deg);
-        }
-
-        .container .tape:before {
-            top: 100%;
-            left: 0;
-            transform: skewX(-45deg);
-        }
-
         body {
-            height: 100vh;
+            margin: 0;
+            padding: 0;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Jost', sans-serif;
+            background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
         }
 
-        .container {
-            width: 700px;
-            padding: 50px;
-            border: 1px solid #623737;
-            border-radius: 30px;
-            background-color: rgba(1, 67, 103, 0.6); /* Adjust the alpha value (0.5 in this example) */
+        .main {
+            width: 350px;
+            height: auto;
+            background: red;
+            overflow: hidden;
+            background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38") no-repeat center/cover;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10000px #000;
         }
 
-        h4 {
-            margin-bottom: 10px;
-            font-size: 24px;
-            color: white;
+        #chk {
+            display: none;
+        }
+
+        .signup {
+            position: relative;
+            width: 100%;
+            height: 100%px; ;
+        }
+
+        label {
+            color: #fff;
+            font-size: 2.3em;
+            justify-content: center;
+            display: flex;
+            margin: 0.1px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .5s ease-in-out;
         }
 
         input {
-            width: 100%;
+            width: 70%;
+            height: 25px;
+            background: #c9c7c7;
+            justify-content: center;
+            display: flex;
+            margin: 20px auto;
             padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 40px;
-
-            border: white;
-    
-    background: #faebe8;
-    align-self: flex-start;
-    border-radius: 100px;
-    font-size: 20px;
+            border: none;
+            outline: none;
+            border-radius: 5px;
         }
 
         select{
-            width: 100%;
+            width: 75%;
+            height: 40px;
+            background: #c9c7c7;
+            justify-content: center;
+            display: flex;
+            margin: 0px auto;
             padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 40px;
-
-            border: rgb(197, 27, 27);
-    /* width: 300px; padding-left: 10px;
-    height: 30px; border-radius: 4px; */
-    background:  #faebe8;
-    align-self: flex-start;
-    border-radius: 100px;
-    font-size: 20px;
+            border: none;
+            outline: none;
+            border-radius: 5px;
         }
 
-        #submit {
-            width: 200px;
-            margin-top: 10px;
-            margin-left: 200px;
-            border-radius: 40px;
-
-            width: 150px;
-    height: 46px;
-    text-transform: uppercase;
-    color: rgb(255, 255, 255);
-    font-size: 10px;
-    background-color: #F47458;
-    border-radius: 100px;
-    border: white;
-    font-size: 20px;
+        button {
+            width: 60%;
+            height: 40px;
+            margin: 10px auto;
+            justify-content: center;
+            display: block;
+            color: #fff;
+            background: #573b8a;
+            font-size: 1em;
+            font-weight: bold;
+            margin-top: 20px;
+            outline: none;
+            border: none;
+            border-radius: 5px;
+            transition: .2s ease-in;
+            cursor: pointer;
         }
 
-        #submit:hover {
-            background-color: #333333;
+        button:hover {
+            background: #6d44b8;
         }
 
-        .image{
-            max-width: 100%;
-            max-height: 100%;
-            font-size: 20px;
-        }  
-
-        .image_container{
-            font-size: 20px;
+        .login {
+            height: 460px;
+            background: #eee;
+            border-radius: 60% / 10%;
+            transform: translateY(-180px);
+            transition: .8s ease-in-out;
         }
 
-        body {
-            background-image: url('27aaa2af-994c-4d8a-8221-c5a3674cbb9b.jpg'); /* Replace '27aaa2af-994c-4d8a-8221-c5a3674cbb9b.jpg' with the path to your image */
-            background-size:cover; /* Cover the entire background */
-            background-repeat: no-repeat; /* Don't repeat the background image */
-            background-position: center; /* Center the background image */
+        .login label {
+            color: #573b8a;
+            transform: scale(.6);
         }
-        
-        #loadingOverlay {
-            display: none;
-            position: absolute;
+
+        #chk:checked~.login {
+            transform: translateY(-500px);
+        }
+
+        #chk:checked~.login label {
+            transform: scale(1);
+        }
+
+        #chk:checked~.signup label {
+            transform: scale(.6);
+        }
+
+        .overlay {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.5);
-            z-index: 999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #loadingBox {
-            padding: 20px;
-            border-radius: 10px;
-            background-color: rgba(255, 255, 255, 0.8);
-            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+            z-index: 9999; /* Ensure it's above other elements */
+            display: none; /* Initially hidden */
         }
 
     </style>
 </head>
 <body>
     <div class="container">
-  <form action="https://script.google.com/macros/s/AKfycbxWZAeRYwAdVHkIQBFKxD8__OfRyKlu8KH7MRtVTlkXkKDrFrJdxIApHIoWUPKp6dSY-Q/exec" name="contact-form" onsubmit="return false">
-            <h4>Enter Your Data</h4>
+        <form action="https://script.google.com/macros/s/AKfycbxWZAeRYwAdVHkIQBFKxD8__OfRyKlu8KH7MRtVTlkXkKDrFrJdxIApHIoWUPKp6dSY-Q/exec" name="contact-form" onsubmit="return false">
+        <div class="main">
+            <input type="checkbox" id="chk" aria-hidden="true">
+            <div class="signup">
+                <form>
+                    <label for="chk" aria-hidden="true" style="font-size: large;">Enter Your Data</label>
+                    
+
             <input type="text" name="الاسم" placeholder="اسم الطالب رباعي" required>
             <input type="text" name="رقم الطالب" placeholder="رقم الطالب" required>
             <input type="text" name="رقم ولي الامر" placeholder="رقم ولي الامر" required>
@@ -168,18 +154,22 @@
                 <option value="الاسماعليه حدائق المعادي">الاسماعليه حدائق المعادي</option>
                 <option value="لرحمه المعادي">الرحمه المعادي</option>
                 <option value="اشراقه السادس">اشراقه السادس</option>
-                <option value="الامل السابع">الامل السابع</option>
+                <option value="اكتوبراشراقه حدائق"> اكتوبراشراقه حدائق</option>
                 <option value="الامل الحصري">الامل الحصري</option>
                 <option value="اسك الحادي عشر">اسك الحادي عشر</option>
                 <option value="اسمارت السابع">اسمارت السابع</option>
+                <option value="الربوه">الربوه</option>
             </select>
             <input type="hidden" name="الكود" id="unique_code">
             <br><br><br>
-            <input type="submit" value="submit" id="submit">
+            <button type="submit" value="submit" id="submit">Sign up</button>
+
         </form>
+        <div class="overlay" id="overlay"></div>
+
         <div id="loadingOverlay" style="display: none;">
             <div id="loadingBox" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 20px; background-color: rgba(255, 255, 255, 0.8); border-radius: 10px; text-align: center;">
-                <p>يتم الان ارسال البيانات برجاء الانتظار للحصول على الكود!</p>
+                <p>يتم الان ارسال البيانات برجاء الانتظار للحصول على الكود...</p>
             </div>
         </div>
     </div>
@@ -200,13 +190,13 @@
         }
 
         function displayLoadingBox() {
-            // Show loading box
-            loadingOverlay.style.display = 'block';
+            document.getElementById('loadingOverlay').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block'; // Show overlay
         }
 
         function hideLoadingBox() {
-            // Hide loading box
-            loadingOverlay.style.display = 'none';
+            document.getElementById('loadingOverlay').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none'; // Hide overlay
         }
 
         
@@ -225,32 +215,36 @@
     // At least 8 characters
     const minLength = 8;
     if (password.length < minLength) {
+        alert("كلمة المرور ضعيفة! يجب أن تحتوي على 8 أحرف على الأقل.");
         return false;
     }
 
     // Should contain at least one uppercase letter
     const uppercaseRegex = /[A-Z]/;
     if (!uppercaseRegex.test(password)) {
+        alert("كلمة المرور ضعيفة! يجب أن تحتوي على حروف كبيره.");
         return false;
     }
 
     // Should contain at least one lowercase letter
     const lowercaseRegex = /[a-z]/;
     if (!lowercaseRegex.test(password)) {
+        alert("كلمة المرور ضعيفة! يجب أن تحتوي علي حروف صغيره.");
         return false;
     }
 
     // Should contain at least one number
     const numberRegex = /[0-9]/;
     if (!numberRegex.test(password)) {
+        alert("كلمة المرور ضعيفة! يجب أن تحتوي على ارقام.");
         return false;
     }
 
     // Should contain at least one special character
-    const specialCharRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
-    if (!specialCharRegex.test(password)) {
-        return false;
-    }
+    // const specialCharRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+    // if (!specialCharRegex.test(password)) {
+    //     return false;
+    // }
 
     return true;
 }
