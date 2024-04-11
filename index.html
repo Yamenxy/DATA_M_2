@@ -131,15 +131,87 @@
             display: none; /* Initially hidden */
         }
 
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: url(https://i.pinimg.com/originals/44/6e/3b/446e3b79395a287ca32f7977dd83b290.jpg);
+            background-size: cover;
+            overflow: hidden;
+        }
+
+        .firefly {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            width: 0.4vw;
+            height: 0.4vw;
+            margin: -0.2vw 0 0 9.8vw;
+            animation: ease 200s alternate infinite;
+            pointer-events: none;
+        }
+
+        .firefly::before,
+        .firefly::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            transform-origin: -10vw;
+        }
+
+        .firefly::before {
+            background: black;
+            opacity: 0.4;
+            animation: drift ease alternate infinite;
+        }
+
+        .firefly::after {
+            background: white;
+            opacity: 0;
+            box-shadow: 0 0 0vw 0vw yellow;
+            animation: drift ease alternate infinite, flash ease infinite;
+        }
+
+        @keyframes drift {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes flash {
+            0%, 30%, 100% {
+                opacity: 0;
+                box-shadow: 0 0 0vw 0vw yellow;
+            }
+            5% {
+                opacity: 1;
+                box-shadow: 0 0 2vw 0.4vw yellow;
+            }
+        }
+
     </style>
 </head>
 <body>
+    <div class="firefly"></div>
+
     <div class="container">
+        <div class="firefly"></div>
+
         <form action="https://script.google.com/macros/s/AKfycbxWZAeRYwAdVHkIQBFKxD8__OfRyKlu8KH7MRtVTlkXkKDrFrJdxIApHIoWUPKp6dSY-Q/exec" name="contact-form" onsubmit="return false">
         <div class="main">
             <input type="checkbox" id="chk" aria-hidden="true">
             <div class="signup">
                 <form>
+                    <label for="chk" aria-hidden="true" style="font-size: large;">الصف الثاني الثانوي</label>
+
                     <label for="chk" aria-hidden="true" style="font-size: large;">Enter Your Data</label>
                     
 
@@ -174,6 +246,8 @@
         </div>
     </div>
     
+
+    
     <script>            
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzLQE7xmur4AKCzMvTFIi-bmiWjC3ImjmgQyeokwa9wjA2bcIBjRog3nHJD6OHeBI8i/exec';
         const form = document.forms['contact-form'];
@@ -207,7 +281,7 @@
             alert("برجاء عدم عمل هذه العملية مرة اخري" );
             if (confirm("Click OK to visit the primary secondary page.")) {
                 console.log("Redirecting to primary secondary page...");
-                window.location.href = 'https://yamenxy.github.io/new_goto_2/';
+                window.location.href = 'https://yamenxy.github.io/new_goto/';
             }
         }
 
