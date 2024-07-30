@@ -300,79 +300,87 @@
             return true;
         }
 
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-            let isValid = true;
+               form.addEventListener('submit', e => {
+    e.preventDefault();
+    let isValid = true;
 
-            const name = form.elements['الاسم'].value.trim();
-            const studentNumber = form.elements['رقم الطالب'].value.trim();
-            const guardianNumber = form.elements['رقم ولي الامر'].value.trim();
-            const password = form.elements['password'].value.trim();
-            const confirmPassword = form.elements['confirm_password'].value.trim();
+    const name = form.elements['الاسم'].value.trim();
+    const studentNumber = form.elements['رقم الطالب'].value.trim();
+    const guardianNumber = form.elements['رقم ولي الامر'].value.trim();
+    const password = form.elements['password'].value.trim();
+    const confirmPassword = form.elements['confirm_password'].value.trim();
 
-            if (!isValidArabic(name)) {
-                isValid = false;
-                alert("ادخل الاسم باللغه العربيه!");
-            }
+    if (!isValidArabic(name)) {
+        isValid = false;
+        alert("ادخل الاسم باللغه العربيه!");
+    }
 
-            if (password !== confirmPassword) {
-                isValid = false;
-                alert("كلمات المرور غير متطابقة!");
-            }
+    if (password !== confirmPassword) {
+        isValid = false;
+        alert("كلمات المرور غير متطابقة!");
+    }
 
-            const wordsCount = name.split(" ").length;
-            if (name.includes("عبد") && wordsCount < 5) { 
-                isValid = false;
-                alert("الرجاء إدخال الاسم رباعي!");
-            } else if (name.includes("منه الله") && wordsCount < 5) {
-                isValid = false;
-                alert("الرجاء إدخال الاسم رباعي!");
-            } else if (!name.includes("عبد") && wordsCount < 4) {
-                isValid = false;
-                alert("الرجاء إدخال الاسم رباعي!");
-            } else if (!name.includes("منه الله") && wordsCount < 4) {
-                isValid = false;
-                alert("الرجاء إدخال الاسم رباعي!");
-            }
+    const wordsCount = name.split(" ").length;
+    if (name.includes("عبد") && wordsCount < 5) { 
+        isValid = false;
+        alert("الرجاء إدخال الاسم رباعي!");
+    } else if (name.includes("منه الله") && wordsCount < 5) {
+        isValid = false;
+        alert("الرجاء إدخال الاسم رباعي!");
+    } else if (!name.includes("عبد") && wordsCount < 4) {
+        isValid = false;
+        alert("الرجاء إدخال الاسم رباعي!");
+    } else if (!name.includes("منه الله") && wordsCount < 4) {
+        isValid = false;
+        alert("الرجاء إدخال الاسم رباعي!");
+    }
 
-            if (!isValidNumber(studentNumber)) {
-                isValid = false;
-                alert("ادخل رقم الطالب صحيح!");
-            }
+    if (!isValidNumber(studentNumber)) {
+        isValid = false;
+        alert("ادخل رقم الطالب صحيح!");
+    }
 
-            if (!isValidNumber(guardianNumber)) {
-                isValid = false;
-                alert("ادخل رقم ولي الامر صحيح!");
-            }
+    if (!isValidNumber(guardianNumber)) {
+        isValid = false;
+        alert("ادخل رقم ولي الامر صحيح!");
+    }
 
-            if (!isStrongPassword(password)) {
-                isValid = false;
-            }
+    if (!isStrongPassword(password)) {
+        isValid = false;
+    }
 
-            if (isValid) {
-                displayLoadingBox();
-                const uniqueCode = generateUniqueCode();
-                document.getElementById('unique_code').value = uniqueCode;
+    if (isValid) {
+        displayLoadingBox();
+        const uniqueCode = generateUniqueCode();
+        document.getElementById('unique_code').value = uniqueCode;
 
-                fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-                    .then(response => response.json())
-                    .then(response => {
-                        hideLoadingBox();
-                        if (response.result === 'success') {
-                            displaySuccessMessage(uniqueCode);
-                        } else if (response.result === 'error') {
-                            alert(response.message);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error!', error.message);
-                        hideLoadingBox();
-                    });
-            }
+        // Prepend a single quote to the numbers
+        const modifiedStudentNumber = "+2" + studentNumber;
+        const modifiedGuardianNumber = "+2" + guardianNumber;
 
-            return false;
-        });
+        // Create a new FormData object with the modified numbers
+        const formData = new FormData(form);
+        formData.set('رقم الطالب', modifiedStudentNumber);
+        formData.set('رقم ولي الامر', modifiedGuardianNumber);
 
+        fetch(scriptURL, { method: 'POST', body: formData })
+            .then(response => response.json())
+            .then(response => {
+                hideLoadingBox();
+                if (response.result === 'success') {
+                    displaySuccessMessage(uniqueCode);
+                } else if (response.result === 'error') {
+                    alert(response.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                hideLoadingBox();
+            });
+    }
+
+    return false;
+});
         function isValidNumber(number) {
             const validPrefixes = ['010', '011', '012', '015'];
             return /^\d{11}$/.test(number) && validPrefixes.includes(number.substring(0, 3));
