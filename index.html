@@ -198,6 +198,32 @@
                 box-shadow: 0 0 2vw 0.4vw yellow;
             }
         }
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 500px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            z-index: 10000;
+        }
+
+        .modal p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .modal button {
+            width: auto;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -235,6 +261,10 @@
                         <p>يتم الان ارسال البيانات برجاء الانتظار للحصول على الكود...</p>
                     </div>
                 </div>
+                <div class="modal" id="successModal" style="display: none;">
+                    <p id="successMessage"></p>
+                    <button onclick="closeModal()">OK</button>
+                </div>
             </div>
         </form>
     </div>
@@ -263,13 +293,26 @@
             document.getElementById('overlay').style.display = 'none'; 
         }
 
-        function displaySuccessMessage(uniqueCode) {
-            alert("شكرا! لقد تم ارسال بياناتك بنجاح و كووووووودك: " + uniqueCode + ".");
-            alert("حفظ الكود مهمتك الشخصيه كودك هو: " + uniqueCode );
-            alert("برجاء عدم عمل هذه العملية مرة اخري" );
-            if (confirm("Click OK to visit the primary secondary page.")) {
-                window.location.href = 'https://yamenxy.github.io/new_goto_2/';
-            }
+        // function displaySuccessMessage(uniqueCode) {
+        //     alert("شكرا! لقد تم ارسال بياناتك بنجاح و كووووووودك: " + uniqueCode + ".");
+        //     alert("حفظ الكود مهمتك الشخصيه كودك هو: " + uniqueCode );
+        //     alert("برجاء عدم عمل هذه العملية مرة اخري" );
+        //     if (confirm("Click OK to visit the primary secondary page.")) {
+        //         window.location.href = 'https://yamenxy.github.io/new_goto_2/';
+        //     }
+        // }
+         function displaySuccessMessage(code) {
+            hideLoadingBox();
+            successMessage.textContent = `Your unique code is: ${code}`;
+            successModal.style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function closeModal() {
+            window.location.href = 'https://yamenxy.github.io/new_goto/';
+            successModal.style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+            form.reset();
         }
 
         function isStrongPassword(password) {
