@@ -328,7 +328,7 @@
                   </div>
                 </div>                <div class="modal" id="successModal" style="display: none;">
                     <p id="successMessage"></p>
-                    <button onclick="closeModal()">OK</button>
+                    <button onclick="closeModal()">اغلاق</button>
                 </div>
             </div>
         </form>
@@ -368,7 +368,7 @@
         // }
          function displaySuccessMessage(code) {
             hideLoadingBox();
-            successMessage.textContent = `Your unique code is: ${code}`;
+            successMessage.textContent = `كودك هو: ${code}`;
             successModal.style.display = 'block';
             document.getElementById('overlay').style.display = 'block';
         }
