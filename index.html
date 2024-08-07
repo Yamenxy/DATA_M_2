@@ -428,6 +428,11 @@
         alert("كلمات المرور غير متطابقة!");
     }
 
+                      if (studentNumber === guardianNumber) {
+        isValid = false;
+        alert("لا يمكن ان تكون الارقام متطابقة!");
+    }
+
     const wordsCount = name.split(" ").length;
     if (name.includes("عبد") && wordsCount < 5) { 
         isValid = false;
