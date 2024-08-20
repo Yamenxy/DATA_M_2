@@ -387,29 +387,29 @@
         }
 
         function isStrongPassword(password) {
-            const minLength = 8;
+            const minLength = 5;
             if (password.length < minLength) {
-                alert("كلمة المرور ضعيفة! يجب أن تحتوي على 8 أحرف على الأقل.");
+                alert("كلمة المرور ضعيفة! يجب أن تحتوي على 5 أحرف على الأقل.");
                 return false;
             }
 
-            const uppercaseRegex = /[A-Z]/;
-            if (!uppercaseRegex.test(password)) {
-                alert("كلمة المرور ضعيفة! يجب أن تحتوي على حروف كبيره.");
-                return false;
-            }
+            // const uppercaseRegex = /[A-Z]/;
+            // if (!uppercaseRegex.test(password)) {
+            //     alert("كلمة المرور ضعيفة! يجب أن تحتوي على حروف كبيره.");
+            //     return false;
+            // }
 
-            const lowercaseRegex = /[a-z]/;
-            if (!lowercaseRegex.test(password)) {
-                alert("كلمة المرور ضعيفة! يجب أن تحتوي علي حروف صغيره.");
-                return false;
-            }
+            // const lowercaseRegex = /[a-z]/;
+            // if (!lowercaseRegex.test(password)) {
+            //     alert("كلمة المرور ضعيفة! يجب أن تحتوي علي حروف صغيره.");
+            //     return false;
+            // }
 
-            const numberRegex = /[0-9]/;
-            if (!numberRegex.test(password)) {
-                alert("كلمة المرور ضعيفة! يجب أن تحتوي على ارقام.");
-                return false;
-            }
+            // const numberRegex = /[0-9]/;
+            // if (!numberRegex.test(password)) {
+            //     alert("كلمة المرور ضعيفة! يجب أن تحتوي على ارقام.");
+            //     return false;
+            // }
 
             return true;
         }
