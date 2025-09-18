@@ -555,43 +555,41 @@ if (!uniqueCode) {
 <script>
     let scannerInstance;
 
-    function startScanner() {
-        document.getElementById("reader").style.display = "block";
-        const reader = new Html5Qrcode("reader");
+        function startScanner() {
+    document.getElementById("reader").style.display = "block";
+    const reader = new Html5Qrcode("reader");
 
-        reader.start(
-  { facingMode: "environment" },
-  {
-    fps: 10,
-    qrbox: { width: 300, height: 150 },
-    aspectRatio: 1.5,
-    disableFlip: false
-  },
-  
-            (decodedText, decodedResult) => {
-                console.log(`Code scanned: ${decodedText}`);
-                document.getElementById("unique_code").value = decodedText;
-                reader.stop().then(() => {
-                    console.log("Scanner stopped");
-                    document.getElementById("reader").style.display = "none";
-                }).catch(err => {
-                    console.error("Failed to stop scanner", err);
-                });
-            },
-            (errorMessage) => {
-                // optional error logging
-            }
-        ).catch(err => {
-            console.error("Error starting scanner", err);
-            alert("تعذر فتح الكاميرا. تحقق من الأذونات.");
-        });
+    reader.start(
+      { facingMode: "environment" },
+      {
+        fps: 10,
+        qrbox: { width: 300, height: 150 },
+        aspectRatio: 1.5,
+        disableFlip: false
+      },
 
-        scannerInstance = reader;
-    }
+      (decodedText, decodedResult) => {
+          console.log(`Code scanned: ${decodedText}`);
+
+          // ✅ Allow only numbers
+          if (/^\d+$/.test(decodedText)) {
+              document.getElementById("unique_code").value = decodedText;
+              reader.stop().then(() => {
+                  console.log("Scanner stopped");
+                  document.getElementById("reader").style.display = "none";
+              });
+          } else {
+              alert("❌ الكود يجب أن يكون أرقام فقط");
+              // Scanner stays active until valid number is scanned
+          }
+      }
+    )
+}
 </script>
 
 
 
 </body>
 </html>
+
 
