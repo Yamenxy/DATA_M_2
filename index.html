@@ -567,24 +567,31 @@
         alert("الرجاء إدخال بريد إلكتروني صحيح!");
     }   
 
-    if (isValid) {
-        displayLoadingBox();
-        const uniqueCode = document.getElementById('unique_code').value;
-if (!uniqueCode) {
-    alert("لم يتم مسح الباركود بعد! برجاء مسحه أولاً.");
-    hideLoadingBox();
-    return;
-}
+     if (isValid) {
+    displayLoadingBox();
+    const uniqueCode = document.getElementById('unique_code').value;
+    if (!uniqueCode) {
+        alert("⚠️ من فضلك امسح الباركود أولاً قبل متابعة التسجيل.");
+        hideLoadingBox();
+        return;
+    }
 
+    // Prepend +2 to phone numbers
+    const modifiedStudentNumber = "+2" + studentNumber;
+    const modifiedGuardianNumber = "+2" + guardianNumber;
 
-        // Prepend a single quote to the numbers
-        const modifiedStudentNumber = "+2" + studentNumber;
-        const modifiedGuardianNumber = "+2" + guardianNumber;
+    // ✅ Fix password if starts with 0
+    let modifiedPassword = password;
+    if (modifiedPassword.startsWith("0")) {
+        modifiedPassword = "'" + modifiedPassword;
+    }
 
-        // Create a new FormData object with the modified numbers
-        const formData = new FormData(form);
-        formData.set('رقم الطالب', modifiedStudentNumber);
-        formData.set('رقم ولي الامر', modifiedGuardianNumber);
+    // Create a new FormData object with modifications
+    const formData = new FormData(form);
+    formData.set('رقم الطالب', modifiedStudentNumber);
+    formData.set('رقم ولي الامر', modifiedGuardianNumber);
+    formData.set('password', modifiedPassword);
+    formData.set('confirm_password', modifiedPassword);
 
         fetch(scriptURL, { method: 'POST', body: formData })
             .then(response => response.json())
@@ -655,6 +662,7 @@ if (!uniqueCode) {
 
 </body>
 </html>
+
 
 
 
