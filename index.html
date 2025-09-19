@@ -362,6 +362,70 @@
             </div>
         </form>
     </div>
+
+
+    <script src="https://unpkg.com/html5-qrcode"></script>
+<script>
+    let reader;
+    let lastScanned = "";
+    let confirmations = 0;
+    const REQUIRED_CONFIRMATIONS = 3; // number of times the same code must appear
+
+    function startScanner() {
+        document.getElementById("reader").style.display = "block";
+        if (reader) {
+            reader.stop().then(() => {
+                initScanner();
+            });
+        } else {
+            initScanner();
+        }
+    }
+
+    function initScanner() {
+        reader = new Html5Qrcode("reader");
+
+        reader.start(
+            { facingMode: "environment" },
+            {
+                fps: 10,
+                qrbox: { width: 300, height: 150 },
+                aspectRatio: 1.5,
+                disableFlip: false
+            },
+            (decodedText, decodedResult) => {
+                console.log("Scanned:", decodedText);
+
+                // ✅ Accept only numeric barcodes
+                if (!/^\d{5}$/.test(decodedText)) return;
+
+                if (decodedText === lastScanned) {
+                    confirmations++;
+                } else {
+                    lastScanned = decodedText;
+                    confirmations = 1;
+                }
+
+                // ✅ Confirm after REQUIRED_CONFIRMATIONS times
+                if (confirmations >= REQUIRED_CONFIRMATIONS) {
+                    document.getElementById("unique_code").value = decodedText;
+
+                    // stop scanner to avoid multiple inputs
+                    reader.stop().then(() => {
+                        document.getElementById("reader").style.display = "none";
+                        console.log("Scanner stopped after successful read.");
+                    }).catch(err => console.error("Stop error:", err));
+                }
+            },
+            (errorMessage) => {
+                // console.log("Scanning error:", errorMessage);
+            }
+        ).catch(err => {
+            console.error("Camera start failed:", err);
+        });
+    }
+</script>
+
     
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycbxIQLOozUChnNs9Q4OS7AHrFiPG4Dk1xJ83XaeeTTHbfJYdUazodn0Pr6lcUOfY_pWdTw/exec';
@@ -591,5 +655,6 @@ if (!uniqueCode) {
 
 </body>
 </html>
+
 
 
