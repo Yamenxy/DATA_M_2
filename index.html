@@ -509,10 +509,30 @@
             return emailRegex.test(email);
             }
 
+        function validateBarcode(unique_code) {
+    if (unique_code.length < 5) {
+        alert("⚠️ من فضلك امسح الباركود مرة اخري الكود يبدو انه قصير.");
+        hideLoadingBox();
+        return false;
+    } 
+    else if (unique_code.length > 5) {
+        alert("⚠️ من فضلك امسح الباركود مرة اخري الكود يبدو انه طويل.");
+        hideLoadingBox();
+        return false;
+    } 
+    else if (!/^\d+$/.test(unique_code)) {
+        alert("⚠️ الكود يجب أن يحتوي على أرقام فقط.");
+        hideLoadingBox();
+        return false;
+    }
+    return true; // ✅ valid barcode
+}
+
                form.addEventListener('submit', e => {
     e.preventDefault();
     let isValid = true;
 
+    const unique_code = form.elements['الكود'].value.trim();
     const name = form.elements['الاسم'].value.trim();
     const studentNumber = form.elements['رقم الطالب'].value.trim();
     const guardianNumber = form.elements['رقم ولي الامر'].value.trim();
@@ -568,6 +588,10 @@
         isValid = false;
         alert("الرجاء إدخال بريد إلكتروني صحيح!");
     }   
+
+    if (!validateBarcode(unique_code)) {
+    isValid = false; 
+    }
 
      if (isValid) {
     displayLoadingBox();
@@ -664,6 +688,7 @@
 
 </body>
 </html>
+
 
 
 
