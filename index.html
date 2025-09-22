@@ -364,7 +364,7 @@
     </div>
 
 
-    <script src="https://unpkg.com/html5-qrcode"></script>
+   <script src="https://unpkg.com/html5-qrcode"></script>
 <script>
     let reader;
     let lastScanned = "";
@@ -373,6 +373,7 @@
 
     function startScanner() {
         document.getElementById("reader").style.display = "block";
+
         if (reader) {
             reader.stop().then(() => {
                 initScanner();
@@ -396,7 +397,7 @@
             (decodedText, decodedResult) => {
                 console.log("Scanned:", decodedText);
 
-                // ✅ Accept only numeric barcodes
+                // ✅ Accept only numeric barcodes (5 digits)
                 if (!/^\d{5}$/.test(decodedText)) return;
 
                 if (decodedText === lastScanned) {
@@ -410,7 +411,7 @@
                 if (confirmations >= REQUIRED_CONFIRMATIONS) {
                     document.getElementById("unique_code").value = decodedText;
 
-                    // stop scanner to avoid multiple inputs
+                    // Stop scanner to avoid multiple inputs
                     reader.stop().then(() => {
                         document.getElementById("reader").style.display = "none";
                         console.log("Scanner stopped after successful read.");
@@ -418,6 +419,7 @@
                 }
             },
             (errorMessage) => {
+                // Suppress scan errors
                 // console.log("Scanning error:", errorMessage);
             }
         ).catch(err => {
